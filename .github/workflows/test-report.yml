@@ -8,6 +8,7 @@ permissions:
   contents: read
   actions: read
   checks: write
+  
 jobs:
   report:
     runs-on: ubuntu-latest

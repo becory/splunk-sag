@@ -2,7 +2,7 @@
   "name": "splunk-sag",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/splunk-sag",
+  "homepage": "https://becory.github.io/splunk-sag",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

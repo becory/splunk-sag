@@ -17,7 +17,7 @@ export const CPUSelect = (props: CPUSelectProps) => {
 
   return (
     <FormControl variant="outlined" fullWidth margin="normal">
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <InputLabel id="cpu-select-label">CPU</InputLabel>
       <Select
         labelId="cpu-select-label"
         id="cpu-select"

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Typography } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 import { validateMemoryInput, formatWithCommas } from "../../utils/validators";
 
 interface MemoryInputProps {
-  value: string;
+  value: string | undefined;
   onChange: (value: string, isValid: boolean, numericValue?: number) => void;
 }
 
@@ -12,7 +12,7 @@ export const MemoryInput: React.FC<MemoryInputProps> = ({
   onChange,
 }) => {
   const [error, setError] = useState<string>("");
-  const [internalValue, setInternalValue] = useState<string>(value);
+  const [internalValue, setInternalValue] = useState<string | undefined>(value);
 
   // Format initial value with commas if it's a valid number
   useEffect(() => {
@@ -47,34 +47,25 @@ export const MemoryInput: React.FC<MemoryInputProps> = ({
   };
 
   return (
-    <>
-      <TextField
-        label="Memory Size (MB)"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={internalValue}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={!!error}
-        helperText={
-          error ||
-          "Memory must be a power of 2, multiple of 1024MB, between 2,048MB-8,388,608MB"
-        }
-        placeholder="Example: 4,096"
-        slotProps={{
-          htmlInput: {
-            "data-testid": "memory-input",
-          },
-        }}
-      />
-      <Typography
-        variant="body2"
-        color="textSecondary"
-        style={{ marginTop: -12, marginBottom: 16 }}
-      >
-        Examples: 2,048MB, 4,096MB, 8,192MB, 16,384MB, etc.
-      </Typography>
-    </>
+    <TextField
+      label="Memory Size (MB)"
+      variant="outlined"
+      fullWidth
+      margin="normal"
+      value={internalValue}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      error={!!error}
+      helperText={error}
+      placeholder="Example: 4,096"
+      slotProps={{
+        htmlInput: {
+          "data-testid": "memory-input",
+        },
+        input: {
+          endAdornment: <InputAdornment position="start">MB</InputAdornment>,
+        },
+      }}
+    />
   );
 };

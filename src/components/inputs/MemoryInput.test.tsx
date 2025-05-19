@@ -1,7 +1,5 @@
-import { render, screen, act } from "@testing-library/react";
-import { CPUSelect } from "./CPUSelect";
-import { CPUModel } from "../../types/types";
-import { selectClickTarget, setup } from "../../utils/test";
+import { render, screen } from "@testing-library/react";
+import { setup } from "../../utils/test";
 import { MemoryInput } from "./MemoryInput";
 
 describe("MemoryInput Component Tests", () => {
@@ -11,21 +9,15 @@ describe("MemoryInput Component Tests", () => {
     mockOnChange.mockClear();
   });
 
-  test("renders with correct initial state", () => {
+  it("renders with correct initial state", () => {
     render(<MemoryInput value="" onChange={mockOnChange} />);
 
     // check rendered
     const inputElement = screen.getByTestId("memory-input");
     expect(inputElement).toBeInTheDocument();
-
-    // check helper text
-    expect(
-      screen.getByText(/Memory must be a power of 2/i)
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Examples:/i)).toBeInTheDocument();
   });
 
-  test("should format initial value with commas", () => {
+  it("should format initial value with commas", () => {
     render(<MemoryInput value="4096" onChange={mockOnChange} />);
 
     // Input should show formatted value
@@ -33,7 +25,7 @@ describe("MemoryInput Component Tests", () => {
     expect(inputElement).toHaveValue("4,096");
   });
 
-  test("should handle valid input correctly", async () => {
+  it("should handle valid input correctly", async () => {
     const { user } = setup(<MemoryInput value="" onChange={mockOnChange} />);
 
     // Enter a valid memory size
@@ -42,14 +34,9 @@ describe("MemoryInput Component Tests", () => {
 
     // Should call onChange with valid=true
     expect(mockOnChange).toHaveBeenCalledWith("8192", true, 8192);
-
-    // No error message should be displayed
-    expect(screen.queryByText(/multiple of 1024MB/i)).not.toHaveClass(
-      "Mui-error"
-    );
   });
 
-  test("should reject input that is not a power of 2", async () => {
+  it("should reject input that is not a power of 2", async () => {
     const { user } = setup(<MemoryInput value="" onChange={mockOnChange} />);
 
     // Enter a valid memory size
@@ -66,7 +53,7 @@ describe("MemoryInput Component Tests", () => {
     expect(screen.getByText(/power of 2/i)).toBeInTheDocument();
   });
 
-  test("should reject input below minimum size", async () => {
+  it("should reject input below minimum size", async () => {
     const { user } = setup(<MemoryInput value="" onChange={mockOnChange} />);
 
     // Enter a memory size below the minimum
@@ -82,7 +69,7 @@ describe("MemoryInput Component Tests", () => {
     expect(screen.getByText(/at least 2,048MB/i)).toBeInTheDocument();
   });
 
-  test("should reject input that is not a multiple of 1024", async () => {
+  it("should reject input that is not a multiple of 1024", async () => {
     const { user } = setup(<MemoryInput value="" onChange={mockOnChange} />);
 
     // Enter a memory size below the minimum

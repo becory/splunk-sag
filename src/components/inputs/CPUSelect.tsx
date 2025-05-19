@@ -1,4 +1,10 @@
-import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { CPUModel } from "../../types/types";
 
 interface CPUSelectProps {
@@ -10,19 +16,22 @@ export const CPUSelect = (props: CPUSelectProps) => {
   const { value, onChange } = props;
 
   return (
-    <Select
-      labelId="cpu-select-label"
-      id="cpu-select"
-      value={value}
-      label="CPU Model"
-      onChange={onChange}
-      data-testid="cpu-select"
-    >
-      {Object.keys(CPUModel).map((item) => (
-        <MenuItem value={item} key={item}>
-          {item}
-        </MenuItem>
-      ))}
-    </Select>
+    <FormControl variant="outlined" fullWidth margin="normal">
+      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <Select
+        labelId="cpu-select-label"
+        id="cpu-select"
+        value={value}
+        label="CPU Model"
+        onChange={onChange}
+        data-testid="cpu-select"
+      >
+        {Object.keys(CPUModel).map((item) => (
+          <MenuItem value={item} key={item}>
+            {item}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };

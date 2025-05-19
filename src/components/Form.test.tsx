@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Form } from "../components/Form";
@@ -14,7 +13,6 @@ describe("Form Component Tests", () => {
 
   // test default value
   test("should initialize with default values", () => {
-    const mockOnSubmit = jest.fn();
     render(<Form onSubmit={mockOnSubmit} />);
 
     // check CPU default value: X86

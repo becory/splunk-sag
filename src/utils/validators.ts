@@ -47,3 +47,8 @@ export const validateMemoryInput = (input: string): { isValid: boolean; errorMes
 export const formatWithCommas = (value: number): string => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+
+export const formatRemoveCommas = (value: string): number => {
+  return parseInt(value.replaceAll(",", ""));
+};

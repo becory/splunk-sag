@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Container, Divider, Stack, Typography } from "@mui/material";
+import { HardwareConfig, ServerModel } from "./types/types";
+import { decideServerModels } from "./utils";
+import { ServerModelOptions, Form } from "./components";
 
 function App() {
+  const [changed, setChanged] = useState(true);
+  const [serverModelOptions, setServerModelOptions] = useState<
+    ServerModel[] | null
+  >(null);
+
+  const handleSubmit = (hardwareConfig: HardwareConfig) => {
+    setServerModelOptions(decideServerModels(hardwareConfig));
+    setChanged(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Typography variant="h1" style={{ fontSize: 36, padding: "16px 0" }}>
+        Server Composer
+      </Typography>
+      <Stack
+        divider={<Divider orientation="horizontal" flexItem />}
+        spacing={2}
+      >
+        <Form onSubmit={handleSubmit} setChanged={setChanged} />
+        {!changed && <ServerModelOptions value={serverModelOptions ?? []} />}
+      </Stack>
+    </Container>
   );
 }
 

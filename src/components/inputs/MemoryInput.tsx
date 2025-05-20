@@ -20,6 +20,7 @@ export const MemoryInput: React.FC<MemoryInputProps> = ({
       const numValue = parseInt(value.replace(/,/g, ""), 10);
       setInternalValue(formatWithCommas(numValue));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

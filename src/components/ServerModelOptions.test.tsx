@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ServerModelOptions } from "./ServerModelOptions";
-import { CPUModel, ServerModel } from "../types";
-import { decideServerModels } from "../utils";
+import { ServerModel } from "../types";
 
 describe("ServerModelOptions Component Tests", () => {
   const mockOnSubmit = jest.fn();

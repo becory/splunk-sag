@@ -9,7 +9,7 @@ jest.mock("./utils", () => ({
   decideServerModels: jest.fn(),
 }));
 
-describe("App Component Tests", () => {
+describe("Main Page Tests", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

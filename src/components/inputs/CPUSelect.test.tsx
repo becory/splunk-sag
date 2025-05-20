@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { CPUSelect } from "./CPUSelect";
 import { CPUModel } from "../../types/types";
 import { selectClickTarget, setup } from "../../utils/test";
@@ -46,14 +46,13 @@ describe("CPUSelect Component Tests", () => {
     // Open the select dropdown
     const selectElement = await selectClickTarget("cpu-select");
     user.click(selectElement);
+    // Click on a different option
+    const armOption = await screen.findByText(CPUModel.ARM);
+    await user.click(armOption);
+    // Verify that onChange was called with the correct value
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
 
-    await act(async () => {
-      // Click on a different option
-      const armOption = await screen.findByText(CPUModel.ARM);
-      await user.click(armOption);
-
-      // Verify that onChange was called with the correct value
-      expect(mockOnChange).toHaveBeenCalledTimes(1);
+    await waitFor(async () => {
       // Material UI's Select passes a SelectChangeEvent in the onChange
       expect(mockOnChange.mock.calls[0][0].target.value).toBe(CPUModel.ARM);
     });
